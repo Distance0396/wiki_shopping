@@ -13,7 +13,12 @@ export default {
     }
   },
   actions: {
-
+    logout (context) {
+      // 个人信息重置
+      context.commit('setUserInfo', {})
+      // 购物车信息重置
+      context.commit('user/setCartList', [], { root: true })
+    }
   },
   getters: {
 

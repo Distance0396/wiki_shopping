@@ -1,17 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/views/login'
+
 import Layout from '@/views/layout'
-import MyOrder from '@/views/myorder'
-import Pay from '@/views/pay'
-import Prodetail from '@/views/prodetail'
-import Search from '@/views/search'
-import SearchList from '@/views/search/list.vue'
 import Home from '@/views/layout/home.vue'
 import Cart from '@/views/layout/cart.vue'
 import Category from '@/views/layout/category.vue'
 import User from '@/views/layout/user.vue'
+
 import store from '@/store'
+// 路由懒加载 被访问时才加载
+const Login = () => import('@/views/login')
+const MyOrder = () => import('@/views/myorder')
+const Pay = () => import('@/views/pay')
+const Prodetail = () => import('@/views/prodetail')
+const Search = () => import('@/views/search')
+const SearchList = () => import('@/views/search/list.vue')
 
 Vue.use(VueRouter)
 
@@ -24,6 +27,7 @@ const router = new VueRouter({
     {
       path: '/',
       component: Layout,
+      redirect: '/home',
       children: [
         {
           path: '/home',

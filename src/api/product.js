@@ -11,3 +11,22 @@ export const getProduct = (obj) => {
     }
   })
 }
+
+// 商品详情页
+export const getProDetail = (goodsId) => {
+  return request.get('/goods/detail', {
+    params: {
+      goodsId
+    }
+  })
+}
+
+// 商品评论
+export const getProductEva = (goodsId, limit) => {
+  return request.get('/comment/listRows', {
+    params: {
+      goodsId,
+      limit
+    }
+  })
+}

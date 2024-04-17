@@ -109,7 +109,10 @@ export default {
       this.$store.commit('user/setUserInfo', res.data)
       console.log(res)
       this.$toast('登录成功')
-      this.$router.push('/home')
+      // 判断有无回调地址
+      const url = this.$route.query.backUrl || '/'
+
+      this.$router.replace(url)
     }
   },
   async created () {

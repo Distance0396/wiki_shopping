@@ -45,10 +45,14 @@ export default {
   computed: {
     querySearch () {
       return this.$route.query.search
+    },
+    queryCategoryId () {
+      return this.$route.query.categoryId
     }
   },
   async created () {
     const { data: { list } } = await getProduct({
+      categoryId: this.queryCategoryId,
       goodsName: this.querySearch,
       page: this.page
     })

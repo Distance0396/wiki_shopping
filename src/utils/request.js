@@ -1,3 +1,4 @@
+import store from '@/store'
 import axios from 'axios'
 import { Toast } from 'vant'
 
@@ -13,6 +14,11 @@ request.interceptors.request.use(function (config) {
     message: '加载中...',
     forbidClick: true
   })
+  const token = store.getters.token
+  if (token) {
+    config.headers['Access-Token'] = token
+    config.headers.platform = 'H5'
+  }
   return config
 }, function (error) {
   // 对请求错误做些什么
@@ -23,8 +29,6 @@ request.interceptors.request.use(function (config) {
 // 添加响应拦截器
 request.interceptors.response.use(function (response) {
   const res = response.data
-  // console.log('响应拦截器-------->')
-  // console.log(res)
   if (res.status !== 200) {
     Toast(res.message)
     return Promise.reject(res.message)
@@ -32,6 +36,7 @@ request.interceptors.response.use(function (response) {
     // 清除 loading 中的效果
     Toast.clear()
   }
+  console.log(res)
   return res
 }, function (error) {
   // 对响应错误做点什么
